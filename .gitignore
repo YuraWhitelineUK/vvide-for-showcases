@@ -1,0 +1,5 @@
+node_modules/
+.next/
+data/*.db
+public/videos/*
+!public/videos/.gitkeep
