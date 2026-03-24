@@ -14,9 +14,9 @@ export default function EndScreen({ path, onRestart }: EndScreenProps) {
   return (
     <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-syngenta-bg/95 backdrop-blur-sm animate-fade-in">
       <div className="text-center px-8 max-w-sm">
-        <div className="w-16 h-16 rounded-full bg-syngenta-magenta/20 flex items-center justify-center mx-auto mb-6">
+        <div className="w-16 h-16 rounded-full bg-syngenta-magenta/20 flex items-center justify-center mx-auto mb-6 animate-circle-pop">
           <svg className="w-8 h-8 text-syngenta-magenta" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            <path className="animate-check-draw" strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
 
@@ -31,7 +31,13 @@ export default function EndScreen({ path, onRestart }: EndScreenProps) {
         {path.length > 0 && (
           <div className="flex items-center justify-center gap-2 mb-8 flex-wrap">
             {path.map((entry, i) => (
-              <span key={i} className="flex items-center gap-2">
+              <span
+                key={i}
+                className="flex items-center gap-2"
+                style={{
+                  animation: `badge-cascade 0.4s ease-out ${0.4 + i * 0.12}s both`,
+                }}
+              >
                 <span
                   className={`text-xs font-medium px-3 py-1 rounded-full ${
                     entry.choice === "yes"
@@ -54,7 +60,8 @@ export default function EndScreen({ path, onRestart }: EndScreenProps) {
         <button
           onClick={onRestart}
           className="py-3 px-8 rounded-full bg-syngenta-magenta text-white font-medium
-                     hover:bg-syngenta-magenta-hover active:scale-95 transition-all duration-150"
+                     hover:bg-syngenta-magenta-hover active:scale-95 transition-all duration-150
+                     animate-button-enter-1"
         >
           Start Over
         </button>

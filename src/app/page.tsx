@@ -129,15 +129,27 @@ export default function Home() {
             onClick={handleStart}
           >
             <div className="text-center animate-fade-in">
-              <div className="w-20 h-20 rounded-full border-2 border-syngenta-magenta flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-syngenta-magenta ml-1" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
+              <div className="relative w-20 h-20 mx-auto mb-6">
+                <div className="absolute inset-0 rounded-full border-2 border-syngenta-magenta/40 animate-pulse-ring" />
+                <div className="absolute inset-0 rounded-full border border-syngenta-magenta/20 animate-pulse-ring-delay" />
+                <div className="relative w-20 h-20 rounded-full border-2 border-syngenta-magenta flex items-center justify-center">
+                  <svg className="w-8 h-8 text-syngenta-magenta ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
               </div>
-              <p className="text-white/60 text-sm font-medium tracking-wide uppercase">
+              <p className="text-white/60 text-sm font-medium tracking-wide uppercase animate-float">
                 Tap to begin
               </p>
             </div>
+          </div>
+        )}
+
+        {phase === "playing" && currentNode && (
+          <div className="absolute inset-0 z-15 flex items-center justify-center pointer-events-none">
+            <h2 className="text-white text-xl font-semibold animate-title-reveal">
+              {currentNode.title}
+            </h2>
           </div>
         )}
 
@@ -156,7 +168,7 @@ export default function Home() {
         )}
 
         {(phase === "playing" || phase === "choosing") && (
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none animate-gradient-shimmer" />
         )}
       </div>
     </div>

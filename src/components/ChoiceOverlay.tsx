@@ -32,21 +32,33 @@ export default function ChoiceOverlay({ hasYes, hasNo, yesLabel, noLabel, onChoi
         {hasYes && (
           <button
             onClick={() => onChoice("yes")}
-            className="flex-1 py-4 px-6 rounded-full bg-syngenta-magenta text-white font-medium text-lg
+            className="group relative flex-1 py-4 px-6 rounded-full bg-syngenta-magenta text-white font-medium text-lg
                        hover:bg-syngenta-magenta-hover active:scale-95 transition-all duration-150
-                       shadow-lg shadow-syngenta-magenta/30 animate-button-enter-1"
+                       shadow-lg shadow-syngenta-magenta/30 animate-button-enter-1 overflow-hidden"
           >
-            {yesLabel}
+            <span className="relative z-10">{yesLabel}</span>
+            <span className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                style={{ animation: "shimmer 1.5s ease-in-out infinite" }}
+              />
+            </span>
           </button>
         )}
         {hasNo && (
           <button
             onClick={() => onChoice("no")}
-            className="flex-1 py-4 px-6 rounded-full bg-white/10 backdrop-blur-sm text-white font-medium text-lg
+            className="group relative flex-1 py-4 px-6 rounded-full bg-white/10 backdrop-blur-sm text-white font-medium text-lg
                        border-2 border-white/40 hover:bg-white/20 active:scale-95 transition-all duration-150
-                       animate-button-enter-2"
+                       animate-button-enter-2 overflow-hidden"
           >
-            {noLabel}
+            <span className="relative z-10">{noLabel}</span>
+            <span className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                style={{ animation: "shimmer 1.5s ease-in-out infinite" }}
+              />
+            </span>
           </button>
         )}
       </div>

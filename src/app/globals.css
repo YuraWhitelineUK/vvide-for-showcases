@@ -106,3 +106,111 @@
 @utility animate-cta-reveal {
   animation: cta-reveal 0.4s ease-out 0.05s both;
 }
+
+/* Splash screen pulse rings */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes pulse-ring-delay {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@utility animate-pulse-ring-delay {
+  animation: pulse-ring-delay 2s cubic-bezier(0.4, 0, 0.2, 1) 0.6s infinite;
+}
+
+/* Progress dot glow pulse */
+@keyframes dot-glow {
+  0%, 100% { box-shadow: 0 0 4px 1px rgba(255, 0, 100, 0.3); }
+  50% { box-shadow: 0 0 10px 3px rgba(255, 0, 100, 0.6); }
+}
+
+@utility animate-dot-glow {
+  animation: dot-glow 1.5s ease-in-out infinite;
+}
+
+/* Progress dot scale-in */
+@keyframes dot-pop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+@utility animate-dot-pop {
+  animation: dot-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Button shimmer on hover */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Title card cinematic reveal */
+@keyframes title-reveal {
+  0% { opacity: 0; transform: translateY(6px); letter-spacing: 0.3em; }
+  30% { opacity: 1; transform: translateY(0); letter-spacing: 0.15em; }
+  70% { opacity: 1; transform: translateY(0); letter-spacing: 0.15em; }
+  100% { opacity: 0; transform: translateY(-4px); letter-spacing: 0.1em; }
+}
+
+@utility animate-title-reveal {
+  animation: title-reveal 2.5s ease-out both;
+}
+
+/* End screen checkmark draw */
+@keyframes check-draw {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@utility animate-check-draw {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: check-draw 0.6s ease-out 0.3s forwards;
+}
+
+/* End screen icon circle scale */
+@keyframes circle-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@utility animate-circle-pop {
+  animation: circle-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* End screen stagger for path badges */
+@keyframes badge-cascade {
+  0% { opacity: 0; transform: translateY(10px) scale(0.8); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Bottom gradient shimmer */
+@keyframes gradient-shimmer {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+@utility animate-gradient-shimmer {
+  animation: gradient-shimmer 3s ease-in-out infinite;
+}
+
+/* Splash text float */
+@keyframes float-text {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@utility animate-float {
+  animation: float-text 2.5s ease-in-out infinite;
+}
