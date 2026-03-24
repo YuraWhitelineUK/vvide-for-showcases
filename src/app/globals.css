@@ -214,3 +214,25 @@
 @utility animate-float {
   animation: float-text 2.5s ease-in-out infinite;
 }
+
+/* Typewriter cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@utility animate-cursor-blink {
+  animation: cursor-blink 0.6s step-end infinite;
+}
+
+/* Dramatic flash text — appears big, scales down, fades out fast */
+@keyframes dramatic-flash {
+  0% { opacity: 0; transform: scale(1.3); filter: blur(4px); }
+  15% { opacity: 1; transform: scale(1); filter: blur(0); }
+  60% { opacity: 1; transform: scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: scale(0.95); filter: blur(2px); }
+}
+
+@utility animate-dramatic-flash {
+  animation: dramatic-flash 1.2s ease-out both;
+}

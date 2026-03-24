@@ -6,6 +6,17 @@ import ChoiceOverlay from "@/components/ChoiceOverlay";
 import ProgressBar from "@/components/ProgressBar";
 import EndScreen from "@/components/EndScreen";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import TypewriterText from "@/components/TypewriterText";
+
+const DRAMATIC_PHRASES = [
+  "A moment of truth.",
+  "No going back.",
+  "The clock is ticking.",
+  "Everything changes now.",
+  "Trust your instincts.",
+  "One wrong move...",
+  "This changes everything.",
+];
 
 interface TreeNode {
   id: string;
@@ -147,20 +158,29 @@ export default function Home() {
 
         {phase === "playing" && currentNode && (
           <div className="absolute inset-0 z-15 flex items-center justify-center pointer-events-none">
-            <h2 className="text-white text-xl font-semibold animate-title-reveal">
-              {currentNode.title}
-            </h2>
+            <div className="text-center px-8">
+              <h2 className="text-white text-xl font-semibold tracking-wide drop-shadow-lg">
+                <TypewriterText key={currentNode.id} text={currentNode.title} speed={55} />
+              </h2>
+            </div>
           </div>
         )}
 
         {phase === "choosing" && currentNode && (
-          <ChoiceOverlay
+          <>
+            <div className="absolute inset-0 z-15 flex items-center justify-center pointer-events-none">
+              <p className="text-white/90 text-lg font-light italic tracking-wider animate-dramatic-flash">
+                {DRAMATIC_PHRASES[Math.floor(Math.random() * DRAMATIC_PHRASES.length)]}
+              </p>
+            </div>
+            <ChoiceOverlay
             hasYes={!!currentNode.yesChild}
             hasNo={!!currentNode.noChild}
             yesLabel={currentNode.yesLabel || "Yes"}
             noLabel={currentNode.noLabel || "No"}
             onChoice={handleChoice}
           />
+          </>
         )}
 
         {phase === "ending" && (
