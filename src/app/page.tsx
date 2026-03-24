@@ -7,6 +7,7 @@ import ProgressBar from "@/components/ProgressBar";
 import EndScreen from "@/components/EndScreen";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import TypewriterText from "@/components/TypewriterText";
+import ProductLanding from "@/components/ProductLanding";
 
 const DRAMATIC_PHRASES = [
   "A moment of truth.",
@@ -34,7 +35,7 @@ interface PathEntry {
   label: string;
 }
 
-type Phase = "loading" | "splash" | "playing" | "choosing" | "ending";
+type Phase = "loading" | "splash" | "playing" | "choosing" | "ending" | "products";
 
 export default function Home() {
   const [tree, setTree] = useState<TreeNode | null>(null);
@@ -93,6 +94,10 @@ export default function Home() {
     [currentNode]
   );
 
+  const handleShowProducts = useCallback(() => {
+    setPhase("products");
+  }, []);
+
   const handleRestart = useCallback(() => {
     if (!tree) return;
     setCurrentNode(tree);
@@ -121,7 +126,7 @@ export default function Home() {
       <div className="relative h-full w-full max-w-[56.25dvh] bg-black">
         <AnimatedBackground />
 
-        {currentNode && phase !== "splash" && (
+        {currentNode && phase !== "splash" && phase !== "products" && (
           <ProgressBar currentLevel={currentNode.level} />
         )}
 
@@ -132,6 +137,14 @@ export default function Home() {
             visible={phase === "playing" || phase === "choosing"}
             blurred={phase === "choosing" || phase === "ending"}
           />
+        )}
+
+        {/* Preload next two possible videos */}
+        {currentNode?.yesChild && (phase === "playing" || phase === "choosing") && (
+          <link rel="preload" href={currentNode.yesChild.videoUrl} as="video" />
+        )}
+        {currentNode?.noChild && (phase === "playing" || phase === "choosing") && (
+          <link rel="preload" href={currentNode.noChild.videoUrl} as="video" />
         )}
 
         {phase === "splash" && (
@@ -174,17 +187,21 @@ export default function Home() {
               </p>
             </div>
             <ChoiceOverlay
-            hasYes={!!currentNode.yesChild}
-            hasNo={!!currentNode.noChild}
-            yesLabel={currentNode.yesLabel || "Yes"}
-            noLabel={currentNode.noLabel || "No"}
-            onChoice={handleChoice}
-          />
+              hasYes={!!currentNode.yesChild}
+              hasNo={!!currentNode.noChild}
+              yesLabel={currentNode.yesLabel || "Yes"}
+              noLabel={currentNode.noLabel || "No"}
+              onChoice={handleChoice}
+            />
           </>
         )}
 
         {phase === "ending" && (
-          <EndScreen path={path} onRestart={handleRestart} />
+          <EndScreen path={path} onRestart={handleRestart} onShowProducts={handleShowProducts} />
+        )}
+
+        {phase === "products" && (
+          <ProductLanding onRestart={handleRestart} />
         )}
 
         {(phase === "playing" || phase === "choosing") && (

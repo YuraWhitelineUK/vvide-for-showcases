@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
+import CountdownTimer from "./CountdownTimer";
 
 const CTA_PHRASES = [
   "What will you do?",
@@ -22,12 +23,59 @@ export default function ChoiceOverlay({ hasYes, hasNo, yesLabel, noLabel, onChoi
   const [ctaText] = useState(() =>
     CTA_PHRASES[Math.floor(Math.random() * CTA_PHRASES.length)]
   );
+  const touchStartX = useRef<number | null>(null);
+  const swiped = useRef(false);
+
+  const handleTimeout = useCallback(() => {
+    // Auto-pick randomly
+    const choices: ("yes" | "no")[] = [];
+    if (hasYes) choices.push("yes");
+    if (hasNo) choices.push("no");
+    if (choices.length > 0) {
+      onChoice(choices[Math.floor(Math.random() * choices.length)]);
+    }
+  }, [hasYes, hasNo, onChoice]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    swiped.current = false;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStartX.current === null || swiped.current) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const threshold = 60;
+
+    if (dx > threshold && hasYes) {
+      swiped.current = true;
+      onChoice("yes");
+    } else if (dx < -threshold && hasNo) {
+      swiped.current = true;
+      onChoice("no");
+    }
+    touchStartX.current = null;
+  }, [hasYes, hasNo, onChoice]);
 
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 px-6 z-20">
-      <p className="text-white/80 text-sm font-medium tracking-wide uppercase mb-5 animate-cta-reveal">
+    <div
+      className="absolute inset-0 flex flex-col items-center justify-end pb-16 px-6 z-20"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Countdown timer */}
+      <div className="mb-4">
+        <CountdownTimer seconds={10} onTimeout={handleTimeout} />
+      </div>
+
+      <p className="text-white/80 text-sm font-medium tracking-wide uppercase mb-1 animate-cta-reveal">
         {ctaText}
       </p>
+
+      {/* Swipe hint */}
+      <p className="text-white/30 text-[10px] tracking-wider mb-4 animate-cta-reveal">
+        Swipe right = {yesLabel} / Swipe left = {noLabel}
+      </p>
+
       <div className="flex gap-5 w-full max-w-sm">
         {hasYes && (
           <button

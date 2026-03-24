@@ -8,9 +8,10 @@ interface PathEntry {
 interface EndScreenProps {
   path: PathEntry[];
   onRestart: () => void;
+  onShowProducts?: () => void;
 }
 
-export default function EndScreen({ path, onRestart }: EndScreenProps) {
+export default function EndScreen({ path, onRestart, onShowProducts }: EndScreenProps) {
   return (
     <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-syngenta-bg/95 backdrop-blur-sm animate-fade-in">
       <div className="text-center px-8 max-w-sm">
@@ -57,14 +58,26 @@ export default function EndScreen({ path, onRestart }: EndScreenProps) {
           </div>
         )}
 
-        <button
-          onClick={onRestart}
-          className="py-3 px-8 rounded-full bg-syngenta-magenta text-white font-medium
-                     hover:bg-syngenta-magenta-hover active:scale-95 transition-all duration-150
-                     animate-button-enter-1"
-        >
-          Start Over
-        </button>
+        <div className="space-y-3">
+          {onShowProducts && (
+            <button
+              onClick={onShowProducts}
+              className="w-full py-3 px-8 rounded-full bg-syngenta-magenta text-white font-medium
+                         hover:bg-syngenta-magenta-hover active:scale-95 transition-all duration-150
+                         shadow-lg shadow-syngenta-magenta/30 animate-button-enter-1"
+            >
+              See Recommended Products
+            </button>
+          )}
+          <button
+            onClick={onRestart}
+            className="w-full py-3 px-8 rounded-full bg-white/5 text-white/50 font-medium
+                       hover:bg-white/10 active:scale-95 transition-all duration-150
+                       border border-white/10 animate-button-enter-2"
+          >
+            Start Over
+          </button>
+        </div>
       </div>
     </div>
   );
