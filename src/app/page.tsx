@@ -5,6 +5,7 @@ import VideoPlayer from "@/components/VideoPlayer";
 import ChoiceOverlay from "@/components/ChoiceOverlay";
 import ProgressBar from "@/components/ProgressBar";
 import EndScreen from "@/components/EndScreen";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 interface TreeNode {
   id: string;
@@ -107,6 +108,8 @@ export default function Home() {
   return (
     <div className="h-dvh bg-syngenta-bg overflow-hidden flex items-center justify-center">
       <div className="relative h-full w-full max-w-[56.25dvh] bg-black">
+        <AnimatedBackground />
+
         {currentNode && phase !== "splash" && (
           <ProgressBar currentLevel={currentNode.level} />
         )}
@@ -116,6 +119,7 @@ export default function Home() {
             src={currentNode.videoUrl}
             onEnded={handleVideoEnded}
             visible={phase === "playing" || phase === "choosing"}
+            blurred={phase === "choosing" || phase === "ending"}
           />
         )}
 
