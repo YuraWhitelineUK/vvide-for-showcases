@@ -1,7 +1,2 @@
 node_modules/
 .next/
-data/*.db
-data/*.db-wal
-data/*.db-shm
-public/videos/*
-!public/videos/.gitkeep

@@ -11,8 +11,15 @@ interface TreeNode {
   title: string;
   videoUrl: string;
   level: number;
+  yesLabel?: string;
+  noLabel?: string;
   yesChild: TreeNode | null;
   noChild: TreeNode | null;
+}
+
+interface PathEntry {
+  choice: "yes" | "no";
+  label: string;
 }
 
 type Phase = "loading" | "splash" | "playing" | "choosing" | "ending";
@@ -21,7 +28,7 @@ export default function Home() {
   const [tree, setTree] = useState<TreeNode | null>(null);
   const [currentNode, setCurrentNode] = useState<TreeNode | null>(null);
   const [phase, setPhase] = useState<Phase>("loading");
-  const [path, setPath] = useState<("yes" | "no")[]>([]);
+  const [path, setPath] = useState<PathEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
   const audioUnlocked = useRef(false);
 
@@ -34,7 +41,7 @@ export default function Home() {
           setCurrentNode(data.root);
           setPhase("splash");
         } else {
-          setError("No videos configured yet. Visit /admin to set up your video tree.");
+          setError("No video tree configured. Add a tree.json to the data/ folder.");
         }
       })
       .catch(() => setError("Failed to load video tree."));
@@ -63,7 +70,11 @@ export default function Home() {
       const next = choice === "yes" ? currentNode.yesChild : currentNode.noChild;
       if (!next) return;
 
-      setPath((prev) => [...prev, choice]);
+      const label = choice === "yes"
+        ? (currentNode.yesLabel || "Yes")
+        : (currentNode.noLabel || "No");
+
+      setPath((prev) => [...prev, { choice, label }]);
       setPhase("playing");
       setCurrentNode(next);
     },
@@ -77,7 +88,6 @@ export default function Home() {
     setPhase("splash");
   }, [tree]);
 
-  // Loading state
   if (phase === "loading") {
     return (
       <div className="h-dvh bg-syngenta-bg flex items-center justify-center">
@@ -86,31 +96,21 @@ export default function Home() {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className="h-dvh bg-syngenta-bg flex flex-col items-center justify-center px-8">
-        <p className="text-white/60 text-center mb-4">{error}</p>
-        <a
-          href="/admin"
-          className="py-3 px-6 rounded-full bg-syngenta-magenta text-white font-medium hover:bg-syngenta-magenta-hover transition-colors"
-        >
-          Go to Admin
-        </a>
+        <p className="text-white/60 text-center">{error}</p>
       </div>
     );
   }
 
   return (
     <div className="h-dvh bg-syngenta-bg overflow-hidden flex items-center justify-center">
-      {/* 9:16 video container — centered on desktop */}
       <div className="relative h-full w-full max-w-[56.25dvh] bg-black">
-        {/* Progress dots */}
         {currentNode && phase !== "splash" && (
           <ProgressBar currentLevel={currentNode.level} />
         )}
 
-        {/* Video */}
         {currentNode && (
           <VideoPlayer
             src={currentNode.videoUrl}
@@ -119,7 +119,6 @@ export default function Home() {
           />
         )}
 
-        {/* Splash / Tap to begin */}
         {phase === "splash" && (
           <div
             className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-syngenta-bg cursor-pointer"
@@ -138,21 +137,20 @@ export default function Home() {
           </div>
         )}
 
-        {/* Choice overlay */}
         {phase === "choosing" && currentNode && (
           <ChoiceOverlay
             hasYes={!!currentNode.yesChild}
             hasNo={!!currentNode.noChild}
+            yesLabel={currentNode.yesLabel || "Yes"}
+            noLabel={currentNode.noLabel || "No"}
             onChoice={handleChoice}
           />
         )}
 
-        {/* End screen */}
         {phase === "ending" && (
           <EndScreen path={path} onRestart={handleRestart} />
         )}
 
-        {/* Dark gradient at bottom for button readability */}
         {(phase === "playing" || phase === "choosing") && (
           <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none" />
         )}

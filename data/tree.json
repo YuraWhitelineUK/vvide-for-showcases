@@ -1,0 +1,216 @@
+{
+  "id": "1",
+  "title": "Something's Wrong",
+  "videoUrl": "/videos/1.mp4",
+  "level": 1,
+  "yesLabel": "Scan the crop",
+  "noLabel": "Walk away",
+  "yesChild": {
+    "id": "2-1A",
+    "title": "Scan It",
+    "videoUrl": "/videos/2-1A.mp4",
+    "level": 2,
+    "yesLabel": "Treat now",
+    "noLabel": "Wait and see",
+    "yesChild": {
+      "id": "3-1A2A",
+      "title": "48-Hour Window",
+      "videoUrl": "/videos/3-1A2A.mp4",
+      "level": 3,
+      "yesLabel": "Treat entire field",
+      "noLabel": "Only treat sick sections",
+      "yesChild": {
+        "id": "4-1A2A3A",
+        "title": "Full Send",
+        "videoUrl": "/videos/4-1A2A3A.mp4",
+        "level": 4,
+        "yesLabel": "Buy more, treat every meter",
+        "noLabel": "Leave the corner",
+        "yesChild": {
+          "id": "5-1A2A3A4A",
+          "title": "Perfect Season",
+          "videoUrl": "/videos/5-1A2A3A4A.mp4",
+          "level": 5
+        },
+        "noChild": {
+          "id": "5-1A2A3A4B",
+          "title": "Almost Perfect",
+          "videoUrl": "/videos/5-1A2A3A4B.mp4",
+          "level": 5
+        }
+      },
+      "noChild": {
+        "id": "4-1A2A3B",
+        "title": "Half Measures",
+        "videoUrl": "/videos/4-1A2A3B.mp4",
+        "level": 4,
+        "yesLabel": "Use remaining product now",
+        "noLabel": "Save it for next season",
+        "yesChild": {
+          "id": "5-1A2A3B4A",
+          "title": "Hard-Won Victory",
+          "videoUrl": "/videos/5-1A2A3B4A.mp4",
+          "level": 5
+        },
+        "noChild": {
+          "id": "5-1A2A3B4B",
+          "title": "Half a Field",
+          "videoUrl": "/videos/5-1A2A3B4B.mp4",
+          "level": 5
+        }
+      }
+    },
+    "noChild": {
+      "id": "3-1A2B",
+      "title": "Gamble",
+      "videoUrl": "/videos/3-1A2B.mp4",
+      "level": 3,
+      "yesLabel": "Start treatment now",
+      "noLabel": "Keep waiting",
+      "yesChild": {
+        "id": "4-1A2B3A",
+        "title": "Late Start",
+        "videoUrl": "/videos/4-1A2B3A.mp4",
+        "level": 4,
+        "yesLabel": "Plow under dead section",
+        "noLabel": "Focus on recovery only",
+        "yesChild": {
+          "id": "5-1A2B3A4A",
+          "title": "Expensive but Saved",
+          "videoUrl": "/videos/5-1A2B3A4A.mp4",
+          "level": 5
+        },
+        "noChild": {
+          "id": "5-1A2B3A4B",
+          "title": "Money Pit",
+          "videoUrl": "/videos/5-1A2B3A4B.mp4",
+          "level": 5
+        }
+      },
+      "noChild": {
+        "id": "4-1A2B3B",
+        "title": "Too Proud",
+        "videoUrl": "/videos/4-1A2B3B.mp4",
+        "level": 4,
+        "yesLabel": "Call for help now",
+        "noLabel": "Give up this season",
+        "yesChild": {
+          "id": "5-1A2B3B4A",
+          "title": "Upgraded Just in Time",
+          "videoUrl": "/videos/5-1A2B3B4A.mp4",
+          "level": 5
+        },
+        "noChild": {
+          "id": "5-1A2B3B4B",
+          "title": "Lost Season",
+          "videoUrl": "/videos/5-1A2B3B4B.mp4",
+          "level": 5
+        }
+      }
+    }
+  },
+  "noChild": {
+    "id": "2-1B",
+    "title": "Three Days Later",
+    "videoUrl": "/videos/2-1B.mp4",
+    "level": 2,
+    "yesLabel": "Call for help",
+    "noLabel": "Handle it alone",
+    "yesChild": {
+      "id": "3-1B2A",
+      "title": "Emergency Call",
+      "videoUrl": "/videos/3-1B2A.mp4",
+      "level": 3,
+      "yesLabel": "Full treatment",
+      "noLabel": "Partial treatment",
+      "yesChild": {
+        "id": "4-1B2A3A",
+        "title": "Premium Treatment",
+        "videoUrl": "/videos/4-1B2A3A.mp4",
+        "level": 4,
+        "yesLabel": "Double down on care",
+        "noLabel": "Cut all spending",
+        "yesChild": {
+          "id": "5-1B2A3A4A",
+          "title": "Investment Paid Off",
+          "videoUrl": "/videos/5-1B2A3A4A.mp4",
+          "level": 5
+        },
+        "noChild": {
+          "id": "5-1B2A3A4B",
+          "title": "Penny Wise, Pound Foolish",
+          "videoUrl": "/videos/5-1B2A3A4B.mp4",
+          "level": 5
+        }
+      },
+      "noChild": {
+        "id": "4-1B2A3B",
+        "title": "Budget Treatment",
+        "videoUrl": "/videos/4-1B2A3B.mp4",
+        "level": 4,
+        "yesLabel": "Upgrade to full treatment",
+        "noLabel": "Stick with partial",
+        "yesChild": {
+          "id": "5-1B2A3B4A",
+          "title": "Just in Time",
+          "videoUrl": "/videos/5-1B2A3B4A.mp4",
+          "level": 5
+        },
+        "noChild": {
+          "id": "5-1B2A3B4B",
+          "title": "Washed Away",
+          "videoUrl": "/videos/5-1B2A3B4B.mp4",
+          "level": 5
+        }
+      }
+    },
+    "noChild": {
+      "id": "3-1B2B",
+      "title": "Alone in the Damage",
+      "videoUrl": "/videos/3-1B2B.mp4",
+      "level": 3,
+      "yesLabel": "Save what's left",
+      "noLabel": "Accept the loss",
+      "yesChild": {
+        "id": "4-1B2B3A",
+        "title": "Last Stand",
+        "videoUrl": "/videos/4-1B2B3A.mp4",
+        "level": 4,
+        "yesLabel": "Add protective covering",
+        "noLabel": "Trust the barrier",
+        "yesChild": {
+          "id": "5-1B2B3A4A",
+          "title": "Seeds of Hope",
+          "videoUrl": "/videos/5-1B2B3A4A.mp4",
+          "level": 5
+        },
+        "noChild": {
+          "id": "5-1B2B3A4B",
+          "title": "Walk Away, Come Back Stronger",
+          "videoUrl": "/videos/5-1B2B3A4B.mp4",
+          "level": 5
+        }
+      },
+      "noChild": {
+        "id": "4-1B2B3B",
+        "title": "Nothing Left",
+        "videoUrl": "/videos/4-1B2B3B.mp4",
+        "level": 4,
+        "yesLabel": "Protect this patch",
+        "noLabel": "Clear everything",
+        "yesChild": {
+          "id": "5-1B2B3B4A",
+          "title": "The Comeback",
+          "videoUrl": "/videos/5-1B2B3B4A.mp4",
+          "level": 5
+        },
+        "noChild": {
+          "id": "5-1B2B3B4B",
+          "title": "Rock Bottom, Then Rise",
+          "videoUrl": "/videos/5-1B2B3B4B.mp4",
+          "level": 5
+        }
+      }
+    }
+  }
+}

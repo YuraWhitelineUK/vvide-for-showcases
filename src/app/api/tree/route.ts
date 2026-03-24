@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { getTreeFromRoot } from "@/lib/db";
+import { getTree } from "@/lib/tree";
 
 export async function GET() {
-  const root = getTreeFromRoot();
+  const root = getTree();
   return NextResponse.json({ root });
 }
